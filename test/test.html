@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title></title>
+		<link rel="stylesheet" href="./src/bootstrap.css">
+		<link rel="stylesheet" href="./style.css">
+		<link rel="stylesheet" href="./pen/src/pen.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body class="vw-98">
+		<div class="container-fluid vh-100">
+				<textarea id="myTextarea"></textarea>
+		</div>
+
+
+
+		<script src="./src/jquery.js"></script>
+		<script src="./src/bootstrap.js"></script>
+		<script src="./src/require.js"></script>
+
+		<!-- 2. patch requirejs. let requirejs support .css files! -->
+		<script src="./src/patch-requirejs.js"></script>
+
+		<!-- 3. configure requirejs. note that requirejs_packages is just a example. -->
+		<script src="./src/requirejs_packages.js"></script>
+		<script src="./test.js" data-main="scripts/main"></script>
+		<!-- 4. Here is our main script -->
+		<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</body>
+</html>
