@@ -1,12 +1,26 @@
+requirejs.config({
+		baseUrl: "https://cdn.jsdelivr.net/npm/",
+		packages: requirejs_packages,
+		// You may add more RequireJS config
+		waitSeconds: 30
+})
 window.onload = function(){
-		var options = {
-		  editor: document.getElementsByClassName("page")[0],
-		  class: 'pen',
-		  debug: false, 
-		}
-		let pen = window.pen = new Pen(options);
-		pen.focus();
+		requirejs([
+		"codemirror",
+		"hypermd",
+		"codemirror/mode/stex/stex",
+		"hypermd/powerpack/fold-math-with-katex",
+		"hypermd/powerpack/paste-with-turndown", "turndown-plugin-gfm",
+		], function (CodeMirror, HyperMD) {
+		var myTextarea = document.getElementsByClassName('page')[0];
+		var editor = HyperMD.fromTextArea(myTextarea, {
+		lineNumbers: false,
+		scrollbarStyle: "null"
+		});
+		editor.setSize("65%",null);
+		editor.focus();
 		page_style();
+});
 }
 $(window).resize(function(){
 		page_style();
@@ -33,7 +47,7 @@ $(".humberger").on("click",function(){
 
 function realtime_preview(){
 		$(".overview").empty();
-		$(".page").each(function(){
+		$(".CodeMirror").each(function(){
 				html2canvas(this).then(function(canvas){
 						const url = canvas.toDataURL();
 						let img = document.createElement("img");
@@ -47,13 +61,17 @@ function realtime_preview(){
 
 function page_style(){
 		let width;
-		width = $(".page").width();
+		width = $(".CodeMirror").width();
 		console.log(width);
-		$(".pen").css("fontSize",String(width * 0.01761904761)+"px");
-		$(".page").height(width * 297 / 210);
-		$(".page").css("padding-left",String(width * 15 / 210) + "px");
-		$(".page").css("padding-right",String(width * 15 / 210) + "px");
-		$(".page").css("padding-top",String(width * 25 / 210) + "px");
-		$(".page").css("padding-bottom",String(width * 25 / 210) + "px");
+		//$(".CodeMirror").css("fontSize",String(width * 0.01761904761)+"px");
+		//$(".CodeMirror").height(width * 297 / 210);
+		//$(".CodeMirror").css("padding-left",String(width * 15 / 210) + "px");
+		//$(".CodeMirror").css("padding-right",String(width * 15 / 210) + "px");
+		//$(".CodeMirror").css("padding-top",String(width * 25 / 210) + "px");
+		//$(".CodeMirror").css("padding-bottom",String(width * 25 / 210) + "px");
+		//$(".CodeMirror-scroll").width(width * 16 / 21);
+		//$(".CodeMirror-scroll").height(width * 297 /210 * 6 / 7);
+		//$(".CodeMirror-scroll").css("margin",0);
+		//$(".CodeMirror-scroll").css("padding",0);
 
 }

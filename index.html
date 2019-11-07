@@ -5,10 +5,9 @@
         <title></title>
 		<link rel="stylesheet" href="./src/bootstrap.css">
 		<link rel="stylesheet" href="./style.css">
-		<link rel="stylesheet" href="./pen/src/pen.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
-<body class="vw-98">
+<body>
 		<div class="container-fluid vh-100">
 				
 				<div class="row h-5"></div>
@@ -20,7 +19,7 @@
 				<div class="row h-90 vw-100">
 						<div id="preview" class="col h-100">
 								<img class="humberger" src="src/humberger.png" alt="humberger">
-								<div class="page"></div>
+								<textarea class="page"></textarea>
 						</div>
 				</div>
 		</div>
@@ -28,48 +27,20 @@
 
 
 
-        <script src="./pen/src/pen.js"></script>
-        <script src="./pen/src/markdown.js"></script>
+		<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 		<script src="./src/jquery.js"></script>
 		<script src="./src/bootstrap.js"></script>
-		<script src="../../demo/vendor/require.js"></script>
-
-		<!-- 2. patch requirejs. let requirejs support .css files! -->
-		<script src="../../goods/patch-requirejs.js"></script>
-
-		<!-- 3. configure requirejs. note that requirejs_packages is just a example. -->
-		<script src="../../demo/requirejs_packages.js"></script>
+		<script src="./src/require.js"></script>
+		<script src="./src/patch-requirejs.js"></script>
+		<script src="./src/requirejs_packages.js"></script>
 		<script>
 				requirejs.config({
-						baseurl: "node_modules/",                   // using local version
-						// You may add more RequireJS config
+						baseUrl: "https://cdn.jsdelivr.net/npm/",
+						packages: requirejs_packages,
 						waitSeconds: 30
 				})
 		</script>
-		<script data-main="scripts/main">
-    requirejs([
-      "codemirror",
-      "hypermd",
-      "codemirror/mode/stex/stex",
-      "hypermd/powerpack/fold-math-with-katex",
-      "hypermd/powerpack/paste-with-turndown", "turndown-plugin-gfm",
-    ], function (CodeMirror, HyperMD) {
-      document.getElementById('loadingSplash').style.display = 'none' // hide the loading... line
-      var myTextarea = document.getElementById('myTextarea')
-      var editor = HyperMD.fromTextArea(myTextarea, {
-        // you may add CodeMirror/HyperMD config here
-      })
-      // and that's all
-      // now you get a `editor` and you can do whatever you want
-      editor.setSize(null, "900px") // set height
-      editor.focus()
-      // to debug the editor easily. expose it to global
-      window['editor'] = editor
-      // try this in console: editor.getValue()
-      // bind events
-  </script>
+		<script src="./index.js"></script>
 
-		<!-- 4. Here is our main script -->
-  </script>	<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </body>
 </html>
