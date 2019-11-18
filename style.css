@@ -18,6 +18,13 @@
 		margin-bottom: 30px;
 		width: 68%;
 		word-wrap: break-word;
+		overflow-x: hidden !important;
+		overflow-y: hidden !important;
+}
+
+.CodeMirror-scroll {
+		overflow-x: hidden !important;
+		overflow-y: hidden !important;
 }
 
 
