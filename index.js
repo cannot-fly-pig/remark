@@ -1,11 +1,7 @@
-requirejs.config({
-		baseUrl: "./node_modules/",
-		packages: requirejs_packages,
-		// You may add more RequireJS config
-		waitSeconds: 30
-})
 window.onload = function(){
 		make_editer();
+		let overview = document.getElementById("overview");
+		let sortable = Sortable.create(overview);
 }
 $(window).resize(function(){
 		page_style();
@@ -19,6 +15,7 @@ function make_editer(){
 		"hypermd/powerpack/fold-math-with-katex",
 		"hypermd/powerpack/paste-with-turndown", "turndown-plugin-gfm",
 		], function (CodeMirror, HyperMD) {
+		console.log(HyperMD);
 		var myTextarea = document.createElement("textarea");
 		$("#preview").append(myTextarea);
 		var editor = HyperMD.fromTextArea(myTextarea, {
@@ -51,14 +48,24 @@ $(".humberger").on("click",function(){
 })
 
 function realtime_preview(){
-		$(".overview").empty();
+		$(".preview-img").remove()
 		const elements = document.getElementsByClassName("CodeMirror");
 		for(let i=0;i<elements.length;i++){
 				html2canvas(elements[i]).then(function(canvas){
 						const url = canvas.toDataURL();
 						let img = document.createElement("img");
 						img.classList.add("preview-img");
-						img.classList.add("shadow-lg");
+						img.classList.add("shadow-gray");
+						img.id = "preview-img" + String(i);
+						img.addEventListener("mouseover",() => {
+								let imgs = img.parentNode.children;
+								for (let i=0;i<imgs.length;i++){
+										imgs[i].classList.remove("shadow-orange");
+										imgs[i].classList.add("shadow-gray");
+								}
+								img.classList.remove("shadow-gray");
+								img.classList.add("shadow-orange");
+						})
 						img.src = url;
 						$(".overview").append(img);
 				})
@@ -110,3 +117,30 @@ function save_pdf(doc){
 //				save_pdf(doc);
 //		})
 //}
+//
+function make_menu(){
+		let template = [{
+		  label: 'file',
+		  submenu: [{
+				  label: "save"
+		  },{
+				  label: "save as"
+		  },{
+			label: 'export as',
+		    submenu: [{
+					label: "export to pdf",
+					click: async () => {make_pdf()}
+			},{
+					label: "export to md"
+			},{
+					label: "export to html"
+			}]
+		  }]
+		}]
+		const menu = Menu.buildFromTemplate(template)
+		Menu.setApplicationMenu(menu)
+}
+async function new_page(){
+		await make_editer()
+		realtime_preview()
+}

@@ -53,6 +53,7 @@
 		height: 90vh;
 		left: 75%;
 		top: 10%;
+		overflow: scroll;
 }
 
 .open {
@@ -66,6 +67,14 @@
 		border: solid black 1px;
 		margin-top: 10%;
 		left: 20%;
+}
+
+.shadow-gray {
+		box-shadow: 0 0 8px gray;
+}
+
+.shadow-orange {
+		box-shadow: 0 0 8px #ffa500;
 }
 
 .toolbar {
@@ -93,4 +102,18 @@
   background: #ccc;
   border-radius: 5px;
   box-shadow: none;
+}
+
+.btn-img {
+		height: 100%;
+		margin: none;
+		margin: none;
+}
+
+.overview-footer {
+		position: absolute;
+		height: 20%;
+		width: 100%;
+		right: 0;
+		bottom: 0;
 }

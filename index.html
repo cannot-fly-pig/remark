@@ -12,31 +12,51 @@
 				
 				<div class="row h-5"></div>
 				<div class="row h-5 toolbar">
-						<button type="button" class="btn btn-secondary h-100" onclick="make_pdf()">1</button>
-						<button type="button" class="btn btn-secondary h-100">2</button>
-						<button type="button" class="btn btn-secondary h-100">3</button>
+						<button type="button" class="btn btn-secondary h-100" onclick="make_pdf()">
+								<img class="btn-img" src="./imgs/save.png">
+						</button>
+						<button type="button" class="btn btn-secondary h-100" onclick="webContents.contents.undo()">
+								<img class="btn-img" src="./imgs/undo.png">
+						</button>
+						<button type="button" class="btn btn-secondary h-100" onclick="webContents.contents.redo()">
+								<img class="btn-img" src="./imgs/redo.png">
+						</button>
 				</div>
 				<div class="row h-90 vw-100">
 						<div id="preview" class="col h-100">
-								<img class="humberger" src="src/humberger.png" alt="humberger">
 						</div>
 				</div>
+				<img class="humberger" src="src/humberger.png" alt="humberger">
 		</div>
-		<div class="overview"></div>
+		<div id = "overview"class="overview">
+				<div id="overview-footer" class="overview-footer">
+						<button class="new-page" onclick="new_page()">New page</button>
+				</div>
+		</div>
 
 
 
-		<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
-		<script src="./src/jquery.js"></script>
+		<script>
+				const electron = require("electron").remote;
+				window.jQuery = window.$ = require('jquery');
+				const ks = require("node-key-sender");
+				const jsPDF = require("jspdf");
+				const html2canvas = require("html2canvas");
+				const Menu = electron.Menu;
+				const webContents = electron.webContents;
+				window.nodeRequire = require;
+				delete window.require;
+		</script>
+		<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 		<script src="./src/bootstrap.js"></script>
 		<script src="./src/require.js"></script>
 		<script src="./src/patch-requirejs.js"></script>
 		<script src="./src/requirejs_packages.js"></script>
 		<script>
 				requirejs.config({
-						baseUrl: "https://cdn.jsdelivr.net/npm/",
+						baseUrl: "./node_modules/",
 						packages: requirejs_packages,
+						// You may add more RequireJS config
 						waitSeconds: 30
 				})
 		</script>
