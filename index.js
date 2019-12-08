@@ -1,11 +1,22 @@
 window.onload = function(){
 		make_editer();
 		let overview = document.getElementById("overview");
-		let sortable = Sortable.create(overview);
+		let sortable = Sortable.create(overview,{
+				onEnd: (e) => {
+						swapItem($(".CodeMirror").eq(e.oldIndex-1),$(".CodeMirror").eq(e.newIndex-1));
+				}
+		});
 }
 $(window).resize(function(){
 		page_style();
 })
+
+function swapItem(from, to) {
+
+  from.replaceWith('<div id="REPLACE_TEMP_DIV"></div>');
+  to.replaceWith(from);
+  $("#REPLACE_TEMP_DIV").replaceWith(to);
+}
 
 function make_editer(){
 		requirejs([
