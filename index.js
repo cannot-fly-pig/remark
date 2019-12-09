@@ -3,7 +3,7 @@ window.onload = function(){
 		let overview = document.getElementById("overview");
 		let sortable = Sortable.create(overview,{
 				onEnd: (e) => {
-						swapItem($(".CodeMirror").eq(e.oldIndex-1),$(".CodeMirror").eq(e.newIndex-1));
+						movePage(e.oldIndex-1,e.newIndex-1);
 				}
 		});
 }
@@ -11,11 +11,12 @@ $(window).resize(function(){
 		page_style();
 })
 
-function swapItem(from, to) {
+function movePage(from, to) {
+		f = $(".CodeMirror").eq(from);
+		$(".CodeMirror").eq(from).remove();
+		if(to != 0) $(".CodeMirror").eq(to-1).after(f);
+		else $(".CodeMirror").eq(to).before(f);
 
-  from.replaceWith('<div id="REPLACE_TEMP_DIV"></div>');
-  to.replaceWith(from);
-  $("#REPLACE_TEMP_DIV").replaceWith(to);
 }
 
 function make_editer(){
