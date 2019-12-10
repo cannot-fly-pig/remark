@@ -47,12 +47,20 @@
 		z-index: 2;
 }
 
-.overview {
+.overview-wrapper {
 		position: absolute;
 		width: 25vw;
 		height: 90vh;
 		left: 75%;
 		top: 10%;
+}
+
+.overview {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		left: 0;
+		top: 0;
 		overflow: scroll;
 }
 
@@ -74,6 +82,10 @@
 }
 
 .shadow-orange {
+		box-shadow: 0 0 8px #ffa500;
+}
+
+.shadow-orange-tmp {
 		box-shadow: 0 0 8px #ffa500;
 }
 
@@ -112,7 +124,7 @@
 
 .overview-footer {
 		position: absolute;
-		height: 20%;
+		height: 10%;
 		width: 100%;
 		right: 0;
 		bottom: 0;

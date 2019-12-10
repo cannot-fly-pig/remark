@@ -1,3 +1,4 @@
+let orangeFlag = 0;
 window.onload = function(){
 		make_editer();
 		let overview = document.getElementById("overview");
@@ -70,13 +71,32 @@ function realtime_preview(){
 						img.classList.add("shadow-gray");
 						img.id = "preview-img" + String(i);
 						img.addEventListener("mouseover",() => {
-								let imgs = img.parentNode.children;
-								for (let i=0;i<imgs.length;i++){
-										imgs[i].classList.remove("shadow-orange");
-										imgs[i].classList.add("shadow-gray");
+								if(!orangeFlag){
+										let imgs = img.parentNode.children;
+										for (let i=0;i<imgs.length;i++){
+												imgs[i].classList.remove("shadow-orange");
+												imgs[i].classList.add("shadow-gray");
+										}
+										img.classList.remove("shadow-gray");
+										img.classList.add("shadow-orange");
 								}
-								img.classList.remove("shadow-gray");
+						})
+						img.addEventListener("mouseleave",() => {
+								if(!orangeFlag){
+										img.classList.remove("shadow-orange");
+										img.classList.add("shadow-gray");
+								}
+						})
+						img.addEventListener("click",() => {
+								orangeFlag = 1;
 								img.classList.add("shadow-orange");
+						})
+						window.document.addEventListener("click",(e) => {
+								if(!e.path[0].classList.contains("shadow-orange")){
+										orangeFlag = 0;
+										$(".shadow-orange").removeClass("shadow-orange");
+										$(".shadow-orange").addClass("shadow-shadow");
+								}
 						})
 						img.src = url;
 						$(".overview").append(img);
