@@ -99,6 +99,7 @@ function realtime_preview(){
 								}
 						})
 						img.src = url;
+						hidari_menu(img);
 						$(".overview").append(img);
 				})
 		}
@@ -175,4 +176,18 @@ function make_menu(){
 async function new_page(){
 		await make_editer()
 		realtime_preview()
+}
+
+
+function hidari_menu(element){
+	var template = [
+      { label: 'copy', click: function() { console.log('item 1 clicked'); } },
+      { label: 'Menu-2', type: 'checkbox', checked: true},
+      { label: 'Menu-3', submenu:[
+         {label: 'Sub-Menu-1', accelerator: 'CmdOrCtrl+M'}]}
+      ];
+	var menu = Menu.buildFromTemplate(template);
+	element.addEventListener('contextmenu', function (e) {
+				menu.popup();
+				});
 }
